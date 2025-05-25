@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linkedin Certificate Generator</title>
+    <link rel="stylesheet" href="styles.css" /> 
+</head>
+<body>
+    <div class = "outer">
+        <div class = "light-br">
+            <div class = "dark-br">
+                <div class = "light-brr">
+                    <div class = "main-content">
+                        <div class = "left-side">
+                            <img src = "LinkedIn.png">
+                        </div>
+                    <div class = "right-content">
+                        <div class = "logo">
+                            <img id = "logo" src = "Learning.png">
+                        </div>
+                        <div class = "congrats">
+                            <h2>Certificate of Completion</h2>
+                            <h3>Congratulation, <span id="fullname"></span></h3>
+                        </div>
+                        <div class = "course name">
+                            <h1><span id="course"></span></h1>
+                            <div class="completion">
+                                <h3>Course completed on <span id="date"></span></h3>
+                                <h3 id = "clength">•&nbsp;&nbsp;<span id="length"></span></h3>
+                            </div>
+                        </div>
+                        <div class = "para">
+                            <h2>
+                                By continuing to learn, you have expanded your perspective, sharpened your
+                                skills, and made yourself even more in demand.
+                            </h2>
+                        </div>
+                        <div class ="authority">
+                            <div class = "part1">
+                                <img id = "sign" src = "Sign2.jpg">
+                                <h3>VP, Learning Content at LinkedIn</h3>
+                            </div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class = "vl"></div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class = "part2">
+                                <h3>LinkedIn Learning</h3>
+                                <h3>1000 W Maude Ave</h3>
+                                <h3>Sunnyvale, CA 94085</h3>
+                            </div>
+                        </div>
+                        <div class="certificate-id">Certificate Id: <span id="certno"></span></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    // Function to generate a random alphanumeric segment
+    function generateRandomSegment(length) {
+      const chars = "abcdef0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    // Function to generate a certificate number
+    function generateCertificateNumber() {
+      const part1 = generateRandomSegment(8);
+      const part2 = generateRandomSegment(4);
+      const part3 = generateRandomSegment(4);
+      const part4 = generateRandomSegment(4);
+      const numberQuoted = `${Math.floor(100000 + Math.random() * 900000)}`; // 6-digit
+      const shortQuoted = `${Math.floor(10 + Math.random() * 90)}`; // 2-digit
+      const oneDigit = `${Math.floor(Math.random() * 10)}`; // 1-digit
+      return `AU${oneDigit}IZ3a3rPeUmO_IE${oneDigit}R${shortQuoted}L${oneDigit}ac${oneDigit}sN`;
+    }
+    //   return `UC-3308c41b-93cb-485a-9ee3-${numberQuoted}f8ef${shortQuoted}`;
+    
+    // Function to generate reference number like 000X
+    function generateReferenceNumberAfter00() {
+      const singleDigit = Math.floor(Math.random() * 10); // 0–9
+      return "000" + singleDigit;
+    }
+
+    // Load user data from localStorage
+    const fullname = localStorage.getItem("fullname");
+    const date = localStorage.getItem("date");
+    const length = localStorage.getItem("length");
+    const course = localStorage.getItem("course");
+    // const instructor = localStorage.getItem("instructor");
+
+    // Insert values into the page
+    document.getElementById("fullname").textContent = fullname;
+    document.getElementById("date").textContent = date;
+    document.getElementById("length").textContent = length;
+    document.getElementById("course").textContent = course;
+    // document.getElementById("instructor").textContent = instructor;
+
+    // Generate certificate number
+    const certNumber = generateCertificateNumber();
+    document.getElementById("certno").textContent = certNumber;
+
+    // Clear localStorage after short delay
+    setTimeout(() => {
+      localStorage.clear();
+    }, 100);
+    });
+  </script>
+</body>
+</html>
